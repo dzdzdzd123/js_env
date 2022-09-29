@@ -29,14 +29,20 @@ static void ReturnThis(const v8::FunctionCallbackInfo<v8::Value>& args) {
 
   Local<Value> arg = args[0];
   Local<Value> key_local;
-  if (arg->IsNumber()){
-    key_local = arg->ToNumber(ctx).ToLocalChecked();
+  if (arg->IsNumber() || arg->IsString()){
+    if (arg->IsNumber()){
+      key_local = arg->ToNumber(ctx).ToLocalChecked();
+    }
+    else {
+      key_local = arg->ToString(ctx).ToLocalChecked();
+    }
+    Local<Value> val_local = obj->Get(ctx, key_local).ToLocalChecked();
+    args.GetReturnValue().Set(val_local);
   }
   else {
-    key_local = arg->ToString(ctx).ToLocalChecked();
+    args.GetReturnValue().SetNull();
   }
-  Local<Value> val_local = obj->Get(ctx, key_local).ToLocalChecked();
-  args.GetReturnValue().Set(val_local);
+
 }
 
 void CreateObject(const FunctionCallbackInfo<Value>& args) {

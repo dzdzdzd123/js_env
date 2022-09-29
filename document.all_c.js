@@ -25,4 +25,6 @@ all['test'] = []
 console.log(typeof all, !!all, all + '')
 console.log(all)
 console.log(all[0], all[1])
-console.log(all("test"), all(0), all(1), all("0"), all("1"),)
+console.log(all("test"), all(0), all(1), all("0"), all("1"))
+console.log(all(), all({}))
+console.log(all('fun'))
