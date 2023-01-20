@@ -283,7 +283,7 @@ class PluginArray {
 
     item(index) {
         if (PluginArray.#rexAllDigits.test(index) && index >= 4294967296) {
-            index = index - 4294967296
+            index = index % 4294967296
         }
         const item = this[index]
         if (item) {
